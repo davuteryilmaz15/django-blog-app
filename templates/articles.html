@@ -1,0 +1,63 @@
+{% extends "layout.html" %}
+
+{% block body %}
+    <h2>Makaleler</h2>
+    <hr>
+    <form action="">
+        <div class="row">
+            {% csrf_token %}
+            <div class="col-md-3" style="padding-right:0;"><input type="text" placeholder="Makale Ara..." maxlength="64" class="input-sm form-control" name="keyword" value="{{ request.GET.keyword }}"></div>
+            <div class="col-md-3" style="padding-left:0;"><button type="submit" class="btn btn-danger">Ara</button></div>
+            <div class="col-md-6"></div>
+        </div> 
+    </form>
+    <hr>
+    {% if articles %}
+        {% for article in articles %}
+            <div class="row">
+
+                <!-- Post Content Column -->
+                <div class="col-lg-8">
+
+                    <!-- Title -->
+                    <h3 class="mt-4">{{article.title}}</h3>
+
+                    <!-- Author -->
+                    <p class="lead">
+                        <a href="javascript:void(0)">{{article.author.username}}</a> tarafından yayınlandı
+                    </p>
+
+                    <!-- Date/Time -->
+                    <p>{{arcitle.created_date}}</p>
+
+                    {% if article.article_image %}
+                    <!-- Preview Image -->
+                    <img class="img-fluid rounded" src="{{article.article_image.url}}" alt="">
+                    {% endif %}
+
+                    <!-- Post Content -->
+                    <p class="lead">
+                        {{ article.content|safe|truncatewords:40 }}
+                        <a href="{% url 'article:articleDetail' article.id %}" class="btn btn-danger" style="float:right">Devamını Oku</a>
+                    </p>
+                    <!--<blockquote class="blockquote">
+                        <p class="mb-0">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.</p>
+                        <footer class="blockquote-footer">Someone famous in
+                        <cite title="Source Title">Source Title</cite>
+                        </footer>
+                    </blockquote>-->
+
+                </div>
+
+                <!-- Sidebar Widgets Column -->
+                <div class="col-md-4">
+
+                </div>
+            </div>
+        {% endfor %}
+    {% else %}
+        <div class="alert alert-warning">Makale bulunamadı.</div>
+    {% endif %}
+    <hr>
+
+{% endblock body %}
