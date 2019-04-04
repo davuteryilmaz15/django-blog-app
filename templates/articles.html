@@ -6,10 +6,9 @@
     <form action="">
         <div class="row">
             {% csrf_token %}
-            <div class="col-md-3" style="padding-right:0;"><input type="text" placeholder="Makale Ara..." maxlength="64" class="input-sm form-control" name="keyword" value="{{ request.GET.keyword }}"></div>
-            <div class="col-md-3" style="padding-left:0;"><button type="submit" class="btn btn-danger">Ara</button></div>
-            <div class="col-md-6"></div>
-        </div> 
+            <div class="col-lg-4 col-md-6 col-10"><input type="text" placeholder="Makale Ara..." maxlength="64" class="input-sm form-control" name="keyword" value="{{ request.GET.keyword }}"></div>
+            <div class="col-md-2 col-2"><button type="submit" class="btn btn-danger">Ara</button></div>
+        </div>
     </form>
     <hr>
     {% if articles %}
